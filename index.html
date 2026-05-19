@@ -3,198 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bình Lợi – The B-side of Saigon</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- CSS File -->
-    <link rel="stylesheet" href="style.css">
+    <title>Bình Lợi - The B-Side of Sai Gon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --gold: #D4AF37;
+            --deep-blue: #0A192F;
+        }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--deep-blue); color: white; }
+        h1, h2, .font-serif { font-family: 'Playfair Display', serif; }
+
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .stamp-card:hover { transform: translateY(-10px); transition: all 0.4s ease; border-color: var(--gold); }
+        
+        /* Hiệu ứng trạm dừng */
+        .station-img { height: 450px; object-fit: cover; border-radius: 20px; transition: 0.5s; }
+        .station-card:hover .station-img { filter: brightness(70%); }
+        
+        .bg-gradient-overlay {
+            background: linear-gradient(0deg, rgba(10,25,47,1) 0%, rgba(10,25,47,0.5) 50%, rgba(10,25,47,0) 100%);
+        }
+
+        /* Scan QR animation */
+        .scan-line { height: 2px; background: var(--gold); position: absolute; width: 100%; top: 0; animation: scan 2s infinite linear; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+    </style>
 </head>
-<body>
+<body class="overflow-x-hidden">
 
-<!-- ═══════════════ HERO ═══════════════ -->
-<div class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-pattern"></div>
-    <div class="hero-badge-strip">
-        <div class="mini-badge"> 6 điểm đến</div>
-        <div class="mini-badge"> 6 huy hiệu</div>
-    </div>
-    <div class="hero-content">
-        <div class="hero-tag"> Khám phá Bình Lợi</div>
-        <h1 class="hero-title">Bình Lợi<br><span>B-side of Saigon</span></h1>
-        <p class="hero-sub">Hành trình cá nhân hóa · Check-in · Sưu tập huy hiệu</p>
-    </div>
-</div>
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-full px-8 py-3">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-blue-900 font-bold italic">B</div>
+                <span class="text-xl font-bold tracking-tighter">BÌNH LỢI <span class="text-yellow-500 font-light">The B-Side</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 font-medium text-sm">
+                <a href="#passport" class="hover:text-yellow-500 transition">Hộ chiếu số</a>
+                <a href="#journey" class="hover:text-yellow-500 transition">Hành trình</a>
+                <a href="#heritage" class="hover:text-yellow-500 transition">Di sản số</a>
+                <a href="#shop" class="hover:text-yellow-500 transition">OCOP</a>
+            </div>
+            <button onclick="alert('Mở Trình quét QR của trình duyệt...')" class="bg-yellow-500 text-blue-950 px-5 py-2 rounded-full font-bold text-sm hover:scale-105 transition active:scale-95">
+                <i class="fa-solid fa-qrcode mr-2"></i> QUÉT QR
+            </button>
+        </div>
+    </nav>
 
-<!-- ═══════════════ NAV ═══════════════ -->
-<nav class="nav-tabs">
-    <button class="nav-tab active" onclick="switchTab('loTrinh',this)"> Lộ trình</button>
-    <button class="nav-tab" onclick="switchTab('NhiemVu',this)"> Nhiệm vụ</button>
-    <button class="nav-tab" onclick="switchTab('HuyHieu',this)"> Huy hiệu</button>
-    <button class="nav-tab" onclick="switchTab('UuDai',this)"> Ưu đãi</button>
-</nav>
+    <!-- HERO SECTION (Ảnh 1: Cầu sắt buổi đêm) -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <img src="anh1.jpg" class="absolute w-full h-full object-cover opacity-60 scale-110">
+        <div class="relative z-10 text-center px-4">
+            <h4 class="text-yellow-500 tracking-[0.3em] uppercase mb-4 font-semibold">Chào mừng bạn đến với</h4>
+            <h1 class="text-6xl md:text-8xl font-bold mb-6">Bình Lợi - Sắc Lành</h1>
+            <p class="max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed italic">Khám phá "mặt B" bình yên và giàu bản sắc của Sài Gòn qua hành trình công nghệ số.</p>
+            <div class="mt-10 flex flex-wrap justify-center gap-4">
+                <a href="#journey" class="bg-white text-blue-900 px-8 py-4 rounded-full font-bold hover:bg-yellow-500 transition">Khám phá ngay</a>
+                <a href="#quiz" class="glass px-8 py-4 rounded-full font-bold hover:bg-white/10 transition">Persona Quiz</a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 animate-bounce">
+            <i class="fa-solid fa-chevron-down text-2xl text-yellow-500"></i>
+        </div>
+    </header>
 
-<!-- ═══════════════ LỘ TRÌNH ═══════════════ -->
-<div id="LoTrinh" class="section active">
-    <div class="route-header">
-        <h2>Lộ trình tối ưu</h2>
-    </div>
-    <p class="route-desc">Kết nối 6 điểm đến trọng điểm theo thứ tự tối ưu nhất — tiết kiệm thời gian di chuyển, tối đa trải nghiệm.</p>
-
-    <div class="route-list">
-        <!-- Điểm 1 -->
-        <div class="route-stop">
-            <div class="stop-num" style="background:var(--xanh-nuoc)">1</div>
-            <div class="stop-card" style="background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url('công viên văn hóa Láng Le.webp') bottom/cover no-repeat !important;">
-                <div class="stop-name">Công viên Văn hóa Láng Le</div>
-                <div class="stop-desc">Công viên Văn hóa Láng Le với diện tích gần 22 ha, nép mình giữa rừng tràm bạt ngàn, từ lâu đã là một điểm đến tiềm năng nhờ không gian thoáng đãng và không khí trong lành. Vị trí cách xa trung tâm thành phố, cùng với sự hiện diện của Học viện Phật giáo Việt Nam (cơ sở 2) và Chùa Thanh Tâm (trước đây là chùa Phật Cô Đơn) liền kề, càng tạo thêm nét đặc sắc cho khu vực.</div>
-                <div class="stop-tags">
-                    <span class="tag tag-xanh-la">Trong lành</span>
-                    <span class="tag tag-vang">Năng động</span>
+    <!-- (1) HỆ THỐNG B-STAMP & PASSPORT -->
+    <section id="passport" class="py-24 px-6 bg-[#0c1e35]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="text-4xl font-bold mb-4 italic">B-Stamp Digital Passport</h2>
+                    <p class="text-gray-400">Sưu tầm đủ 06 điểm chạm để nhận ưu đãi OCOP đặc biệt.</p>
+                </div>
+                <div class="glass p-4 rounded-2xl flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="text-xs text-gray-400 uppercase tracking-widest">Tiến độ hành trình</p>
+                        <p class="text-xl font-bold text-yellow-500">2 / 6 STAMPS</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full border-2 border-yellow-500 flex items-center justify-center">
+                        <i class="fa-solid fa-map-location-dot text-yellow-500"></i>
+                    </div>
                 </div>
             </div>
+
+            <!-- Bản đồ hành trình tương tác -->
+            <div class="relative rounded-3xl overflow-hidden glass p-2 mb-12 h-[300px] flex items-center justify-center border-2 border-dashed border-white/20">
+                <p class="text-gray-500 italic"><i class="fa-solid fa-satellite mr-2"></i> Bản đồ tương tác thông minh đang định vị vị trí của bạn...</p>
+                <div class="absolute inset-0 bg-yellow-500/5 pointer-events-none"></div>
+            </div>
         </div>
-        <!-- Điểm 2 -->
-        <div class="route-stop">
-            <div class="stop-num" style="background:var(--do-mai-chua);color:#A62F20">2</div>
-            <div class="stop-card" style="background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url('chùa thanh tâm.jpg'); bottom/cover no-repeat !important;">
-                <div class="stop-name">Chùa Thanh Tâm</div>
-                <div class="stop-time"> Thời gian dự kiến: 8:45 – 10:00 · ~ 75 phút</div>
-                <div class="stop-desc">Thanh Tâm tự là cái tên khá xa lạ với số đông, hầu hết người ta nhớ đến nơi này dưới tên gọi Bát Bửu Phật Đài, hay dân dã hơn: chùa Phật Cô Đơn.</div>
-                <div class="stop-tags">
-                    <span class="tag tag-vang">Tâm linh</span>
-                    <span class="tag tag-xanh">Check-in</span>
+    </section>
+
+    <!-- (7) 6 ĐỊA ĐIỂM THAM QUAN THEO THỨ TỰ -->
+    <section id="journey" class="py-24 bg-deep-blue">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center text-5xl font-bold mb-20 italic">Vòng Cung Sắc Lành</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <!-- 1. Công viên Láng Le - Bàu Cò (Ảnh 1) -->
+                <div class="station-card group relative">
+                    <div class="overflow-hidden rounded-3xl">
+                        <img src="anh1.jpg" class="station-img w-full group-hover:scale-110">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-overlay flex flex-col justify-end p-8 rounded-3xl">
+                        <span class="text-yellow-500 font-bold mb-2 tracking-widest">TRẠM 01</span>
+                        <h3 class="text-2xl font-bold mb-2">CV Văn hóa Láng Le - Bàu Cò</h3>
+                        <p class="text-sm text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition">Nơi lưu giữ hào khí oai hùng của vùng đất Bình Chánh.</p>
+                        <div class="flex gap-2">
+                            <span class="bg-green-500 text-[10px] px-2 py-1 rounded-md font-bold italic">ĐÃ NHẬN STAMP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Chùa Thanh Tâm - Phật cô đơn (Ảnh 3) -->
+                <div class="station-card group relative">
+                    <div class="overflow-hidden rounded-3xl">
+                        <img src="anh3.jpg" class="station-img w-full group-hover:scale-110">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-overlay flex flex-col justify-end p-8 rounded-3xl">
+                        <span class="text-yellow-500 font-bold mb-2 tracking-widest">TRẠM 02</span>
+                        <h3 class="text-2xl font-bold mb-2">Chùa Thanh Tâm - Phật cô đơn</h3>
+                        <p class="text-sm text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition">Không gian an yên để chữa lành tâm hồn.</p>
+                        <div class="flex gap-2">
+                             <span class="bg-white/20 text-[10px] px-2 py-1 rounded-md">QUÉT ĐỂ NHẬN STAMP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Đình Bình Lợi (Ảnh 4) -->
+                <div class="station-card group relative">
+                    <div class="overflow-hidden rounded-3xl">
+                        <img src="anh4.jpg" class="station-img w-full group-hover:scale-110">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-overlay flex flex-col justify-end p-8 rounded-3xl">
+                        <span class="text-yellow-500 font-bold mb-2 tracking-widest">TRẠM 03</span>
+                        <h3 class="text-2xl font-bold mb-2">Đình Thần Bình Lợi Trung</h3>
+                        <p class="text-sm text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition">Biểu tượng tâm linh lâu đời của cư dân bản địa.</p>
+                    </div>
+                </div>
+
+                <!-- 4. Làng nghề làm nhang (Ảnh 5) -->
+                <div class="station-card group relative">
+                    <div class="overflow-hidden rounded-3xl">
+                        <img src="anh5.jpg" class="station-img w-full group-hover:scale-110">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-overlay flex flex-col justify-end p-8 rounded-3xl">
+                        <span class="text-yellow-500 font-bold mb-2 tracking-widest">TRẠM 04</span>
+                        <h3 class="text-2xl font-bold mb-2">Làng nghề làm nhang</h3>
+                        <p class="text-sm text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition">Lắng nghe âm thanh gõ tăm nhang và sắc đỏ làng nghề.</p>
+                    </div>
+                </div>
+
+                <!-- 5. Làng Mai vàng (Ảnh 6) -->
+                <div class="station-card group relative">
+                    <div class="overflow-hidden rounded-3xl">
+                        <img src="anh6.jpg" class="station-img w-full group-hover:scale-110">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-overlay flex flex-col justify-end p-8 rounded-3xl">
+                        <span class="text-yellow-500 font-bold mb-2 tracking-widest">TRẠM 05</span>
+                        <h3 class="text-2xl font-bold mb-2">Làng Mai vàng Bình Lợi</h3>
+                        <p class="text-sm text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition">Ngắm nhìn sắc vàng rực rỡ bên dòng sông Chợ Đệm.</p>
+                    </div>
+                </div>
+
+                <!-- 6. Vườn trái cây (Ảnh 7/Ảnh 2) -->
+                <div class="station-card group relative">
+                    <div class="overflow-hidden rounded-3xl">
+                        <img src="anh7.jpg" class="station-img w-full group-hover:scale-110">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-overlay flex flex-col justify-end p-8 rounded-3xl">
+                        <span class="text-yellow-500 font-bold mb-2 tracking-widest">TRẠM 06</span>
+                        <h3 class="text-2xl font-bold mb-2">Vườn trái cây & Farmstay</h3>
+                        <p class="text-sm text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition">Trải nghiệm đạp vịt và hái dâu chín mọng tại vườn.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- (2) MULTIMEDIA: DI SẢN SỐ -->
+    <section id="heritage" class="py-24 px-6 glass mx-6 rounded-[3rem]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+            <div class="w-full md:w-1/2">
+                <h2 class="text-4xl font-bold mb-6 italic">Kho lưu trữ Di sản Số</h2>
+                <div class="space-y-6">
+                    <div class="p-6 bg-white/5 rounded-2xl flex items-center gap-6 hover:bg-white/10 transition cursor-pointer">
+                        <div class="w-14 h-14 bg-yellow-500 rounded-full flex items-center justify-center text-blue-900">
+                            <i class="fa-solid fa-headphones-simple text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Podcast ASMR: Tiếng gõ tăm nhang</h4>
+                            <p class="text-xs text-gray-400 italic">Thanh âm bản địa chân thực nhất</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white/5 rounded-2xl flex items-center gap-6 hover:bg-white/10 transition cursor-pointer border-l-4 border-yellow-500">
+                        <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-vr-cardboard text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Tầm nhìn 360 độ: Đình Bình Lợi</h4>
+                            <p class="text-xs text-gray-400 italic">Khám phá góc khuất kiến trúc</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="w-full md:w-1/2 relative rounded-3xl overflow-hidden border-8 border-white/5 shadow-2xl">
+                <img src="anh5.jpg" class="w-full h-[400px] object-cover opacity-50">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-blue-900 text-3xl shadow-lg">
+                        <i class="fa-solid fa-play ml-1"></i>
+                    </div>
+                </div>
+                <div class="absolute bottom-4 left-6 bg-black/60 p-2 rounded-lg text-xs">VIDEO POV: Quy trình làm nhang thủ công</div>
+            </div>
         </div>
-        <!-- Điểm 3 -->
-        <div class="route-stop">
-            <div class="stop-num" style="background:var(--xanh-la)">3</div>
-            <div class="stop-card" style="background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url('đình bình lợi.jpg'); center/cover no-repeat !important;">
-                <div class="stop-name">Đình Bình Lợi</div>
-                <div class="stop-time">Thời gian dự kiến: 10:15 – 11:45 · ~ 90 phút</div>
-                <div class="stop-desc">Nép mình cuối đường Đặng Thùy Trâm, khu phố 48, Đình Thần Bình Lợi Trung từ lâu đã trở thành một phần không thể thiếu trong đời sống tinh thần và lịch sử của người dân địa phương.
-Được hình thành vào cuối thế kỷ XIX, đình là nơi thờ tự linh thiêng, gắn liền với tín ngưỡng dân gian truyền thống. Đặc biệt, nơi đây từng là cơ sở cách mạng quan trọng, góp phần nuôi giấu cán bộ, tổ chức các cuộc họp bí mật trong thời kỳ kháng chiến chống thực dân, đế quốc.</div>
-                <div class="stop-tags">
-                    <span class="tag tag-xanh">Di tích lịch sử</span>
-                    <span class="tag tag-xanh">Cổ kính</span>
+    </section>
+
+    <!-- (3) PERSONA QUIZ & UGC CONTEST -->
+    <section id="quiz" class="py-24 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold mb-8 italic">Mặt B của bạn là gì?</h2>
+            <p class="text-gray-400 mb-12">Trả lời vài câu hỏi để tìm ra "Persona" phù hợp với tâm hồn bạn tại Bình Lợi.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass p-8 rounded-3xl hover:bg-yellow-500/10 cursor-pointer">
+                    <i class="fa-solid fa-leaf text-4xl text-green-500 mb-4"></i>
+                    <h4 class="font-bold">The Healing Soul</h4>
+                </div>
+                <div class="glass p-8 rounded-3xl hover:bg-yellow-500/10 cursor-pointer border-2 border-yellow-500">
+                    <i class="fa-solid fa-hammer text-4xl text-yellow-500 mb-4"></i>
+                    <h4 class="font-bold">Craft Master</h4>
+                </div>
+                <div class="glass p-8 rounded-3xl hover:bg-yellow-500/10 cursor-pointer">
+                    <i class="fa-solid fa-book-atlas text-4xl text-blue-400 mb-4"></i>
+                    <h4 class="font-bold">History Seeker</h4>
                 </div>
             </div>
+            
+            <div class="mt-20 p-12 glass rounded-[3rem] border-2 border-dashed border-white/20">
+                <h3 class="text-2xl font-bold mb-4">UGC Contest: Khoảnh khắc Sắc Lành</h3>
+                <p class="mb-8 text-gray-400 italic font-light">Tải lên video TikTok/Reels về hành trình của bạn để nhận quà OCOP.</p>
+                <button class="bg-blue-600 px-8 py-3 rounded-full font-bold"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Gửi bài dự thi</button>
+            </div>
         </div>
-        <!-- Điểm 4 -->
-        <div class="route-stop">
-            <div class="stop-num" style="background:var(--do-nhang)">4</div>
-            <div class="stop-card" style="background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url('làng nghề nhang.webp'); center/cover no-repeat !important;">
-                <div class="stop-name">Lang nghề nhang</div>
-                <div class="stop-time">Thời gian dự kiến: 12:00 – 13:30 · ~ 90 phút</div>
-                <div class="stop-desc">Làng nghề truyền thống - trên bàn thờ gia tiên của người Việt, nhang (hương) là thứ không thể thiếu trong những dịp lễ, tết, hiếu, hỉ.... Nhang được xem như chiếc cầu nối giữa thế giới thực tại và tâm linh, là “chiếc xe” chuyên chở những lời thỉnh cầu hay ước mong của con người đến với tổ tiên, trời, Phật.</div>
-                <div class="stop-tags">
-                    <span class="tag tag-do">Làng nghề truyền thống</span>
-                    <span class="tag tag-vang">Văn hóa</span>
+    </section>
+
+    <!-- (4) E-COMMERCE OCOP -->
+    <section id="shop" class="py-24 bg-[#0a192f]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center mb-16">
+                <h2 class="text-4xl font-bold italic">Gian hàng đặc sản OCOP</h2>
+                <div class="flex gap-4">
+                    <button class="w-10 h-10 glass rounded-full flex items-center justify-center"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="w-10 h-10 glass rounded-full flex items-center justify-center text-yellow-500"><i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="checkin-section">
-        <h3 class="checkin-title">📍 Tọa độ Check-in nổi bật</h3>
-        <div class="checkin-grid">
-            <div class="checkin-card">
-                <div class="checkin-icon">🛕</div>
-                <div class="checkin-name">Chùa Thanh Tâm</div>
-                <div class="checkin-coord">10.8421°N 106.7253°E</div>
-                <div class="checkin-tip">Chụp góc cổng tam quan lúc 7h sáng</div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Sản phẩm 1 -->
+                <div class="glass rounded-3xl p-4 group">
+                    <img src="anh5.jpg" class="w-full h-48 object-cover rounded-2xl mb-4 group-hover:scale-95 transition">
+                    <h4 class="font-bold mb-1 uppercase text-sm tracking-tighter">Nhang thảo mộc Sắc Lành</h4>
+                    <p class="text-yellow-500 font-bold text-lg mb-4">45.000 VNĐ</p>
+                    <button class="w-full py-3 bg-white text-blue-900 rounded-xl font-bold text-sm">Thêm vào giỏ</button>
+                </div>
+                <!-- Sản phẩm 2 -->
+                <div class="glass rounded-3xl p-4 group border-t-4 border-yellow-500">
+                    <img src="anh6.jpg" class="w-full h-48 object-cover rounded-2xl mb-4 group-hover:scale-95 transition">
+                    <h4 class="font-bold mb-1 uppercase text-sm tracking-tighter">Mai vàng bonsai (Hộ dân liên kết)</h4>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-gray-400 line-through text-xs">1.200.000đ</span>
+                        <span class="text-yellow-500 font-bold">Voucher -20%</span>
+                    </div>
+                    <button class="w-full py-3 bg-yellow-500 text-blue-900 rounded-xl font-bold text-sm italic">Áp dụng Stamp</button>
+                </div>
+                <!-- Sản phẩm 3 -->
+                <div class="glass rounded-3xl p-4 group">
+                    <img src="anh7.jpg" class="w-full h-48 object-cover rounded-2xl mb-4 group-hover:scale-95 transition">
+                    <h4 class="font-bold mb-1 uppercase text-sm tracking-tighter">Mật ong hoa tràm</h4>
+                    <p class="text-yellow-500 font-bold text-lg mb-4">180.000 VNĐ</p>
+                    <button class="w-full py-3 bg-white text-blue-900 rounded-xl font-bold text-sm">Thêm vào giỏ</button>
+                </div>
+                <!-- Sản phẩm 4 (Giftbox) -->
+                <div class="glass rounded-3xl p-4 group bg-yellow-500/5">
+                    <div class="h-48 flex flex-center items-center justify-center bg-white/5 rounded-2xl mb-4">
+                        <i class="fa-solid fa-gift text-6xl text-yellow-500 opacity-30"></i>
+                    </div>
+                    <h4 class="font-bold mb-1 uppercase text-sm tracking-tighter">Giftbox: Trọn vị Bình Lợi</h4>
+                    <p class="text-yellow-500 font-bold text-lg mb-4">Liên hệ đặt trước</p>
+                    <button class="w-full py-3 bg-white text-blue-900 rounded-xl font-bold text-sm">Xem chi tiết</button>
+                </div>
             </div>
-            <div class="checkin-card">
-                <div class="checkin-icon">🌉</div>
-                <div class="checkin-name">Làng nghề nhang</div>
-                <div class="checkin-coord">10.8388°N 106.7201°E</div>
-                <div class="checkin-tip">Đứng giữa cầu ngắm mặt trời mọc</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ═══════════════ NHIỆM VỤ ═══════════════ -->
-<div id="nhiemVu" class="section">
-    <div class="mission-header">
-        <h2>Nhiệm vụ</h2>
-        <div class="progress-bar-wrap">
-            <div class="progress-bar" id="missionBar" style="width:25%"></div>
-        </div>
-        <span class="progress-label" id="missionLabel">1/4</span>
-    </div>
-
-    <div class="mission-list" id="missionList">
-        <div class="mission-card done" data-id="0">
-            <div class="mission-status">✓</div>
-            <div class="mission-info">
-                <div class="mission-title">Thắp nén nhang đầu tiên</div>
-                <div class="mission-place">🛕 Chùa Bình Lợi Cổ Tự</div>
-                <div class="mission-desc">Thắp nhang và chụp ảnh bàn thờ Phật trong ánh sáng ban mai.</div>
-                <div class="mission-reward"><span>🏅</span> Huy hiệu "Người Thành Tâm" · Giảm 10% đồ ăn</div>
-            </div>
-        </div>
-
-        <div class="mission-card" data-id="1" onclick="completeMission(this)">
-            <div class="mission-status">!</div>
-            <div class="mission-info">
-                <div class="mission-title">Đặt chân lên cầu sắt 100 năm</div>
-                <div class="mission-place">🌉 Cầu Bình Lợi Cũ</div>
-                <div class="mission-desc">Tìm biển số sản xuất năm 1902 trên cầu.</div>
-                <div class="mission-reward"><span>🏅</span> Huy hiệu "Thám Tử Di Sản" · Miễn phí guide tour</div>
+            
+            <div class="mt-12 text-center text-gray-500 text-sm">
+                <i class="fa-solid fa-truck-fast mr-2"></i> Kết nối vận chuyển: <span class="font-bold">GHTK | Viettel Post</span>
             </div>
         </div>
-        <!-- Thêm các mission khác tương tự ở đây... -->
-    </div>
-</div>
+    </section>
 
-<!-- ═══════════════ HUY HIỆU ═══════════════ -->
-<div id="huyHieu" class="section">
-    <p class="badge-intro">Sưu tập huy hiệu để mở khóa ưu đãi độc quyền!</p>
-    <div class="badge-progress-wrap">
-        <div class="bp-label">Tiến độ sưu tập</div>
-        <div class="bp-bar-bg"><div class="bp-bar" id="badgeBar" style="width:12.5%"></div></div>
-        <div class="bp-stats"><span id="badgeCount">1/8 huy hiệu</span><span>Còn 7 cái nữa</span></div>
-    </div>
-
-    <div class="badge-grid">
-        <div class="badge-item unlocked">
-            <div class="badge-new">MỚI</div>
-            <div class="badge-emoji">🙏</div>
-            <div class="badge-name">Người Thành Tâm</div>
-            <div class="badge-cond">Thắp nhang Chùa</div>
-            <div class="badge-perk">-10% đồ ăn</div>
-        </div>
-        <div class="badge-item locked">
-            <div class="badge-emoji">🔍</div>
-            <div class="badge-name">Thám Tử Di Sản</div>
-            <div class="badge-cond">Khám phá cầu cũ</div>
-            <div class="badge-perk">Tour miễn phí</div>
-        </div>
-        <!-- Thêm các huy hiệu khác... -->
-    </div>
-</div>
-
-<!-- ═══════════════ ƯU ĐÃI ═══════════════ -->
-<div id="uuDai" class="section">
-    <div class="uu-dai-list">
-        <div class="uu-dai-card">
-            <div class="uu-icon do">🙏</div>
-            <div class="uu-info">
-                <div class="uu-name">Giảm 10% đồ ăn vặt</div>
-                <div class="uu-detail">Áp dụng quanh Chùa Bình Lợi</div>
-                <div class="uu-badge-req earned">✓ Đã mở khóa</div>
+    <!-- (5) FOOTER / ADMIN DASHBOARD PREVIEW -->
+    <footer class="py-12 bg-black/40 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div>
+                <p class="text-gray-500 text-sm italic">Hệ thống quản trị bởi Đoàn xã Bình Lợi - Năm 2024</p>
+                <div class="flex gap-4 mt-4 opacity-50">
+                    <a href="#" class="text-xs hover:text-white transition">Admin Dashboard</a>
+                    <a href="#" class="text-xs hover:text-white transition">Hợp tác Hộ nông dân</a>
+                    <a href="#" class="text-xs hover:text-white transition">Báo cáo chỉ số Reach</a>
+                </div>
             </div>
-            <div class="uu-discount">-10%</div>
+            <div class="flex gap-6">
+                <i class="fa-brands fa-tiktok text-xl opacity-50 hover:opacity-100 cursor-pointer"></i>
+                <i class="fa-brands fa-facebook text-xl opacity-50 hover:opacity-100 cursor-pointer"></i>
+                <i class="fa-brands fa-instagram text-xl opacity-50 hover:opacity-100 cursor-pointer"></i>
+            </div>
         </div>
-        <!-- Thêm các ưu đãi khác... -->
+    </footer>
+
+    <!-- SCANNER MODAL PLACEHOLDER -->
+    <div id="scanner" class="fixed inset-0 z-[100] bg-black flex items-center justify-center hidden">
+        <div class="relative w-80 h-80 border-2 border-yellow-500 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.4)]">
+            <div class="scan-line"></div>
+            <p class="absolute bottom-4 left-0 w-full text-center text-xs font-bold text-yellow-500">ĐANG QUÉT MÃ QR TẠI THỰC ĐỊA...</p>
+        </div>
+        <button onclick="document.getElementById('scanner').classList.add('hidden')" class="absolute top-10 right-10 text-4xl">&times;</button>
     </div>
-</div>
 
-<div class="toast" id="toast"></div>
-
-<!-- JS File -->
-<script src="script.js"></script>
 </body>
 </html>
